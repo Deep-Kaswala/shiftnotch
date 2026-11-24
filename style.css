@@ -95,3 +95,8 @@ footer {
   font-size: 14px;
 }
 footer a { margin-right: 14px; }
+
+.small {
+  font-size: 14px;
+  color: var(--muted);
+}

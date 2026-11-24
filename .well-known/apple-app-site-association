@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["NQ4WPS85ZP.com.deepkaswala.Shiftnotch"],
+        "components": [
+          {
+            "/": "/reset.html",
+            "comment": "Password recovery opens in Shiftnotch when it is installed"
+          }
+        ]
+      }
+    ]
+  }
+}
