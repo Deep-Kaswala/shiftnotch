@@ -15,7 +15,7 @@
   <p class="lede">You can sign in to Shiftnotch now. If you opened this on a computer,
      go back to your iPhone — your account is ready either way.</p>
 
-  <p><a class="button" href="shiftnotch://">Open Shiftnotch</a></p>
+  <p><a class="button" id="open-app" href="shiftnotch://confirm">Open Shiftnotch</a></p>
 
   <footer>
     <a href="./">Shiftnotch</a>
@@ -23,5 +23,19 @@
     <a href="terms.html">Terms</a>
   </footer>
 </main>
+<script>
+  // Safari gets here because Supabase redirects, and iOS hands a redirect to the web
+  // page rather than to the app — only a direct tap opens a universal link. So the
+  // button carries the code across instead, through the custom scheme.
+  //
+  // Keeping the code in the URL and out of the template is what preserves PKCE: the
+  // verifier never leaves the phone, so a link lifted from an inbox is still useless
+  // to anyone else. Linking straight here with a token hash would remove the extra
+  // tap and that protection together.
+  (function () {
+    var open = document.getElementById("open-app");
+    if (open) open.href = "shiftnotch://confirm" + window.location.search;
+  })();
+</script>
 </body>
 </html>

@@ -20,7 +20,7 @@
      else using the link if they get hold of it. Forward the email to yourself there,
      or open it in the Mail app on that iPhone.</p>
 
-  <p><a class="button" href="shiftnotch://reset">Open Shiftnotch</a></p>
+  <p><a class="button" id="open-app" href="shiftnotch://reset">Open Shiftnotch</a></p>
 
   <p class="small">Link expired, or asked for it by mistake? Nothing has changed —
      your old password still works. Ask for a new link from the sign-in screen, or
@@ -32,5 +32,19 @@
     <a href="terms.html">Terms</a>
   </footer>
 </main>
+<script>
+  // Safari gets here because Supabase redirects, and iOS hands a redirect to the web
+  // page rather than to the app — only a direct tap opens a universal link. So the
+  // button carries the code across instead, through the custom scheme.
+  //
+  // Keeping the code in the URL and out of the template is what preserves PKCE: the
+  // verifier never leaves the phone, so a link lifted from an inbox is still useless
+  // to anyone else. Linking straight here with a token hash would remove the extra
+  // tap and that protection together.
+  (function () {
+    var open = document.getElementById("open-app");
+    if (open) open.href = "shiftnotch://reset" + window.location.search;
+  })();
+</script>
 </body>
 </html>
